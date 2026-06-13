@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MtaaniWeb - Your Journey to Online Success</title>
+  <meta name="description" content="MtaaniWeb delivers affordable starter websites for small businesses in Kenya. Get your business online in 48 hours. Starting from KES 2,800." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0D0B2B;
+      --navy-mid: #13103A;
+      --navy-light: #1A1650;
+      --cyan: #38B6FF;
+      --purple: #9B59B6;
+      --white: #FFFFFF;
+      --muted: #A0A0C0;
+      --border: rgba(56, 182, 255, 0.15);
+      --gradient: linear-gradient(90deg, #38B6FF, #9B59B6);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 11, 43, 0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .nav-logo-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--gradient);
+      color: var(--white) !important;
+      padding: 9px 20px;
+      border-radius: 6px;
+      font-weight: 600 !important;
+      font-size: 0.85rem !important;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .nav-cta:hover { opacity: 0.85; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: all 0.3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 68px;
+      left: 0;
+      right: 0;
+      background: var(--navy-mid);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 5%;
+      flex-direction: column;
+      gap: 20px;
+      z-index: 99;
+    }
+
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-menu a:last-child { border-bottom: none; }
+
+    /* BUTTONS */
+    .btn-primary {
+      display: inline-block;
+      background: var(--gradient);
+      color: var(--white);
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--white);
+      padding: 13px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      transition: border-color 0.2s, transform 0.15s;
+    }
+
+    .btn-outline:hover { border-color: var(--cyan); transform: translateY(-1px); }
+
+    /* HERO */
+    .hero {
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      padding: 80px 5% 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(155, 89, 182, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(56, 182, 255, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 760px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 24px;
+      border: 1px solid rgba(56, 182, 255, 0.3);
+      padding: 6px 14px;
+      border-radius: 4px;
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.12;
+      margin-bottom: 28px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 .gradient-line {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      display: inline-block;
+    }
+
+    .hero h1 .gradient-line::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient);
+      animation: underline-draw 1.2s ease forwards 0.6s;
+    }
+
+    @keyframes underline-draw {
+      to { width: 100%; }
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 16px;
+      line-height: 1.75;
+    }
+
+    .hero-sub2 {
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin-bottom: 40px;
+    }
+
+    .hero-pricing {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .price-old {
+      font-size: 1rem;
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    .price-new {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .price-tag {
+      font-size: 0.8rem;
+      color: var(--cyan);
+      background: rgba(56, 182, 255, 0.1);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 90px 5%;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .section-body {
+      color: var(--muted);
+      max-width: 560px;
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    /* WHY SECTION */
+    .why-section {
+      background: var(--navy-mid);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-top: 60px;
+    }
+
+    .pain-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .pain-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .pain-list li::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--purple);
+      margin-top: 8px;
+      flex-shrink: 0;
+    }
+
+    .why-solution {
+      background: var(--navy-light);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px;
+    }
+
+    .why-solution p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+
+    .why-solution p:last-child { margin-bottom: 0; }
+
+    .why-solution strong { color: var(--white); font-weight: 600; }
+
+    /* WHAT YOU GET */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 56px;
+    }
+
+    .feature-card {
+      background: var(--navy-mid);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px;
+      transition: border-color 0.2s;
+    }
+
+    .feature-card:hover { border-color: rgba(56, 182, 255, 0.35); }
+
+    .feature-icon {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 16px;
+      background: var(--gradient);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .feature-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: white;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .feature-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+
+    .addons-block {
+      margin-top: 48px;
+      padding: 32px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--navy-mid);
+    }
+
+    .addons-block h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.8rem;
+    }
+
+    .addons-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      list-style: none;
+    }
+
+    .addons-list li {
+      font-size: 0.88rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+
+    /* HOW IT WORKS */
+    .how-section { background: var(--navy-mid); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0;
+      margin-top: 60px;
+      position: relative;
+    }
+
+    .step {
+      padding: 32px 28px;
+      position: relative;
+    }
+
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 52px;
+      right: 0;
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+    }
+
+    .step-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--cyan);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .step h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+
+    /* PRICING */
+    .pricing-card {
+      max-width: 520px;
+      margin: 56px auto 0;
+      background: var(--navy-mid);
+      border: 1px solid rgba(56, 182, 255, 0.3);
+      border-radius: 14px;
+      padding: 48px;
+      text-align: center;
+    }
+
+    .pricing-card .price-display {
+      margin: 24px 0 8px;
+    }
+
+    .pricing-card .price-display .new {
+      font-family: 'Syne', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .pricing-card .price-display .old {
+      display: block;
+      font-size: 0.95rem;
+      color: var(--muted);
+      text-decoration: line-through;
+      margin-bottom: 6px;
+    }
+
+    .pricing-card .price-note {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .pricing-includes {
+      list-style: none;
+      text-align: left;
+      margin-bottom: 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pricing-includes li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .pricing-includes li::before {
+      content: '';
+      display: block;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--gradient);
+      flex-shrink: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M3 8l3.5 3.5L13 5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-size: cover;
+    }
+
+    .pricing-ongoing {
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .pricing-ongoing h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .ongoing-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ongoing-list li {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      color: var(--muted);
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ongoing-list li:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .ongoing-list li span:last-child { color: var(--white); font-weight: 500; }
+
+    /* ABOUT */
+    .about-inner {
+      max-width: 680px;
+    }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 56px;
+      align-items: start;
+    }
+
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .contact-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cyan);
+    }
+
+    .contact-value {
+      font-size: 1rem;
+      color: var(--white);
+    }
+
+    .contact-value a {
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .contact-value a:hover { color: var(--cyan); }
+
+    .social-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .social-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .social-links a:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* CTA BANNER */
+    .cta-banner {
+      background: var(--navy-mid);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 100px 5%;
+    }
+
+    .cta-banner h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    .cta-banner p {
+      color: var(--muted);
+      font-size: 1rem;
+      margin-bottom: 40px;
+    }
+
+    /* LEGAL PAGES */
+    .legal-content {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .legal-content h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 40px 0 16px;
+      color: var(--white);
+    }
+
+    .legal-content h2:first-of-type { margin-top: 0; }
+
+    .legal-content p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+
+    .legal-content ul {
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.75;
+      padding-left: 20px;
+      margin-bottom: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      border-top: 1px solid var(--border);
+      padding: 40px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      cursor: pointer;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--white); }
+
+    .footer-copy {
+      color: var(--muted);
+      font-size: 0.82rem;
+      width: 100%;
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      margin-top: 16px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .why-grid { grid-template-columns: 1fr; gap: 40px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+      .step:not(:last-child)::after { display: none; }
+
+      .pricing-card { padding: 32px 24px; }
+      .hero { padding: 60px 5% 40px; min-height: auto; }
+
+      footer { flex-direction: column; align-items: flex-start; }
+      .footer-copy { text-align: left; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero h1 .gradient-line::after { animation: none; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" onclick="showPage('home')">
+      <span class="nav-logo-text">MtaaniWeb</span>
+    </a>
+    <ul class="nav-links">
+      <li><a onclick="showPage('home'); scrollTo('why')">Why MtaaniWeb</a></li>
+      <li><a onclick="showPage('home'); scrollTo('features')">What You Get</a></li>
+      <li><a onclick="showPage('home'); scrollTo('pricing')">Pricing</a></li>
+      <li><a onclick="showPage('about')">About</a></li>
+      <li><a onclick="showPage('contact')">Contact</a></li>
+      <li><a class="nav-cta" href="https://wa.me/254715392010?text=Hi%20MtaaniWeb%2C%20I%27d%20like%20to%20get%20my%20business%20online." target="_blank">Get Started</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a onclick="showPage('home'); closeMenu(); scrollTo('why')">Why MtaaniWeb</a>
+    <a onclick="showPage('home'); closeMenu(); scrollTo('features')">What You Get</a>
+    <a onclick="showPage('home'); closeMenu(); scrollTo('how')">How It Works</a>
+    <a onclick="showPage('home'); closeMenu(); scrollTo('pricing')">Pricing</a>
+    <a onclick="showPage('about'); closeMenu()">About</a>
+    <a onclick="showPage('contact'); closeMenu()">Contact</a>
+    <a href="https://wa.me/254715392010?text=Hi%20MtaaniWeb%2C%20I%27d%20like%20to%20get%20my%20business%20online." target="_blank" style="color: var(--cyan);">Get Started on WhatsApp</a>
+  </div>
+
+  <!-- HOME PAGE -->
+  <div class="page active" id="page-home">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <span class="hero-eyebrow">Starter Sites for Kenyan Businesses</span>
+        <h1>Get your business <span class="gradient-line">online in 48 hours.</span></h1>
+        <p class="hero-sub">No technical knowledge. No complexity. Just a complete starter site built and launched for you.</p>
+        <p class="hero-sub2">We design, set up, and launch your business online so customers can find you faster.</p>
+        <div class="hero-pricing">
+          <span class="price-old">KES 3,800</span>
+          <span class="price-new">KES 2,800</span>
+          <span class="price-tag">Limited Offer</span>
+        </div>
+        <div class="hero-actions">
+          <a onclick="scrollTo('why')" class="btn-outline">Learn More</a>
+          <a href="https://wa.me/254715392010?text=Hi%20MtaaniWeb%2C%20I%27d%20like%20to%20get%20my%20business%20online." target="_blank" class="btn-primary">Get Started on WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section class="why-section" id="why">
+      <div class="section-label">The Problem</div>
+      <h2 class="section-title">Most small businesses struggle to get online.</h2>
+      <p class="section-body">The tools exist. The platforms exist. But the gap between wanting to be online and actually getting there is where most businesses get stuck.</p>
+      <div class="why-grid">
+        <div>
+          <ul class="pain-list">
+            <li>Website development is expensive and out of reach for most small budgets</li>
+            <li>Technical setup is confusing without a background in web development</li>
+            <li>DIY tools take too much time to learn and get right</li>
+            <li>Agencies charge agency prices for work a small business does not need</li>
+          </ul>
+        </div>
+        <div class="why-solution">
+          <p>MtaaniWeb solves this by delivering a <strong>fully managed starter site service</strong> built for simplicity, speed, and affordability.</p>
+          <p>We do not sell complexity. We deliver online presence. You tell us your business, we handle the rest.</p>
+          <p>From nothing to live in 48 hours, at a price that makes sense for where you are right now.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features">
+      <div class="section-label">What You Get</div>
+      <h2 class="section-title">Everything included. Nothing hidden.</h2>
+      <p class="section-body">Every MtaaniWeb starter site comes with the full setup. You do not pay extra for the basics.</p>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3>Custom Domain</h3>
+          <p>Your own .co.ke or .com domain. Your business name, your address online.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <h3>Up to 3 Pages</h3>
+          <p>Home, About, and Contact. A clean, complete starter presence that covers everything a first visitor needs.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+          </div>
+          <h3>Mobile Friendly</h3>
+          <p>Your site works perfectly on every phone. Most of your customers will find you on mobile first.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <h3>WhatsApp Integration</h3>
+          <p>A direct WhatsApp contact button so customers can reach you instantly from your site.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3>48-Hour Delivery</h3>
+          <p>Send us your details today, your business is live online within 48 hours.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </div>
+          <h3>Basic SEO Setup</h3>
+          <p>Page titles, descriptions, and structure set up correctly so search engines can find you.</p>
+        </div>
+      </div>
+
+      <div class="addons-block">
+        <h3>Optional Add-ons</h3>
+        <ul class="addons-list">
+          <li>Business email setup</li>
+          <li>Additional pages</li>
+          <li>Future upgrades on request</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-section" id="how">
+      <div class="section-label">The Process</div>
+      <h2 class="section-title">Four steps from nothing to live.</h2>
+      <p class="section-body">Simple by design. You send us your details, we take it from there.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">Step 01</div>
+          <h3>Order via WhatsApp</h3>
+          <p>Send your business name, description, and any branding materials. That is all we need to start.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">Step 02</div>
+          <h3>We Build</h3>
+          <p>We design your site, configure your domain, and set everything up within 48 hours.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">Step 03</div>
+          <h3>You Review</h3>
+          <p>We send you a live preview. You can request one round of revisions before we finalise.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">Step 04</div>
+          <h3>You Launch</h3>
+          <p>Your business goes live. We hand over everything you need and you are online.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">One price. Everything included.</h2>
+      <p class="section-body">No surprise fees. No monthly subscriptions to start. Just a single setup payment.</p>
+
+      <div class="pricing-card">
+        <div class="section-label">Starter Site</div>
+        <div class="price-display">
+          <span class="old">KES 3,800</span>
+          <span class="new">KES 2,800</span>
+        </div>
+        <p class="price-note">One-time payment. Limited launch offer.</p>
+        <ul class="pricing-includes">
+          <li>Full website setup and design</li>
+          <li>Custom domain configuration</li>
+          <li>Up to 3 pages</li>
+          <li>Mobile-friendly design</li>
+          <li>WhatsApp contact integration</li>
+          <li>Basic SEO setup</li>
+          <li>1 revision round</li>
+          <li>Launch support via WhatsApp</li>
+        </ul>
+        <a href="https://wa.me/254715392010?text=Hi%20MtaaniWeb%2C%20I%27d%20like%20to%20get%20my%20business%20online." target="_blank" class="btn-primary" style="width:100%;text-align:center;">Get Started on WhatsApp</a>
+
+        <div class="pricing-ongoing">
+          <h4>Ongoing Annual Costs</h4>
+          <ul class="ongoing-list">
+            <li><span>Domain renewal</span><span>~KES 350/year</span></li>
+            <li><span>Hosting maintenance</span><span>KES 350/year</span></li>
+            <li><span>Business email (optional)</span><span>~KES 128/month</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-banner">
+      <h2>Ready to take your business online?</h2>
+      <p>Your Journey to Online Success starts here.</p>
+      <a href="https://wa.me/254715392010?text=Hi%20MtaaniWeb%2C%20I%27d%20like%20to%20get%20my%20business%20online." target="_blank" class="btn-primary">Get Started on WhatsApp</a>
+    </section>
+
+  </div>
+
+  <!-- ABOUT PAGE -->
+  <div class="page" id="page-about">
+    <section style="padding-top: 80px;">
+      <div class="about-inner">
+        <div class="section-label">About</div>
+        <h1 class="section-title">We are not an agency.</h1>
+        <p class="section-body" style="margin-bottom: 28px;">MtaaniWeb is a digital setup service built for small businesses, freelancers, and hustlers who need a fast, affordable way to get online.</p>
+        <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.8; max-width: 600px; margin-bottom: 20px;">We focus on one thing: helping businesses become visible online without technical barriers. We handle the setup, the domain, the design, and the launch so you can focus on running your business.</p>
+        <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.8; max-width: 600px; margin-bottom: 20px;">A starter site is exactly what the name says. It is a professional first step online, not the final destination. We are honest about that because we believe the right foundation matters more than an oversold promise.</p>
+        <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.8; max-width: 600px; margin-bottom: 40px;">When you are ready to grow, your domain and your presence are already yours to build on.</p>
+        <a href="https://wa.me/254715392010?text=Hi%20MtaaniWeb%2C%20I%27d%20like%20to%20learn%20more." target="_blank" class="btn-primary">Talk to Us on WhatsApp</a>
+      </div>
+    </section>
+    <section class="cta-banner">
+      <h2>Ready to take your business online?</h2>
+      <p>Your Journey to Online Success starts here.</p>
+      <a href="https://wa.me/254715392010?text=Hi%20MtaaniWeb%2C%20I%27d%20like%20to%20get%20my%20business%20online." target="_blank" class="btn-primary">Get Started on WhatsApp</a>
+    </section>
+  </div>
+
+  <!-- CONTACT PAGE -->
+  <div class="page" id="page-contact">
+    <section style="padding-top: 80px;">
+      <div class="section-label">Contact</div>
+      <h1 class="section-title">Get in touch.</h1>
+      <p class="section-body">For inquiries, orders, or support, reach us directly. We respond on WhatsApp.</p>
+      <div class="contact-grid">
+        <div style="display: flex; flex-direction: column; gap: 32px;">
+          <div class="contact-item">
+            <span class="contact-label">WhatsApp</span>
+            <span class="contact-value"><a href="https://wa.me/254715392010?text=Hi%20MtaaniWeb%2C%20I%27d%20like%20to%20get%20my%20business%20online." target="_blank">+254 715 392 010</a></span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Email</span>
+            <span class="contact-value"><a href="mailto:info@mtaaniweb.co.ke">info@mtaaniweb.co.ke</a></span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Location</span>
+            <span class="contact-value">Nairobi, Kenya (Remote Service)</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Social Media</span>
+            <div class="social-links">
+              <a href="https://www.instagram.com/mtaaniweb?igsh=czNrbXhhNHgzdHR3" target="_blank">Instagram</a>
+              <a href="https://www.facebook.com/profile.php?id=61590972200500" target="_blank">Facebook</a>
+            </div>
+          </div>
+        </div>
+        <div style="background: var(--navy-mid); border: 1px solid var(--border); border-radius: 12px; padding: 36px;">
+          <h3 style="font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 12px;">Start with WhatsApp</h3>
+          <p style="color: var(--muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 24px;">The fastest way to get your business online is to send us a message. Tell us your business name and what you do, and we will take it from there.</p>
+          <a href="https://wa.me/254715392010?text=Hi%20MtaaniWeb%2C%20I%27d%20like%20to%20get%20my%20business%20online." target="_blank" class="btn-primary" style="width: 100%; text-align: center;">Open WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- TERMS PAGE -->
+  <div class="page" id="page-terms">
+    <section style="padding-top: 80px;">
+      <div class="legal-content">
+        <div class="section-label">Legal</div>
+        <h1 class="section-title">Terms and Conditions</h1>
+
+        <h2>Service Agreement</h2>
+        <p>By using MtaaniWeb services, you agree to the following terms. Please read them carefully before placing an order.</p>
+        <ul>
+          <li>Delivery timeframe is up to 48 hours after receiving all required business information from the client</li>
+          <li>Each project includes one revision round only</li>
+          <li>Additional revisions may incur extra charges at MtaaniWeb's discretion</li>
+          <li>Domain ownership is registered in the client's name or managed on their behalf depending on the arrangement agreed at the time of order</li>
+          <li>Hosting maintenance fees apply annually for continued site availability</li>
+          <li>MtaaniWeb reserves the right to refuse projects that violate legal or ethical standards</li>
+        </ul>
+
+        <h2>Scope of Service</h2>
+        <p>MtaaniWeb provides the following as part of the starter site package:</p>
+        <ul>
+          <li>Website design and setup (static starter site)</li>
+          <li>Domain configuration</li>
+          <li>Basic SEO structure</li>
+          <li>Mobile optimisation</li>
+          <li>Launch support via WhatsApp</li>
+        </ul>
+        <p>MtaaniWeb does not provide:</p>
+        <ul>
+          <li>Advanced web applications or dynamic systems</li>
+          <li>Complex backend systems or databases</li>
+          <li>E-commerce functionality unless explicitly stated and agreed upon</li>
+          <li>Long-term content management or ongoing site updates beyond the agreed scope</li>
+        </ul>
+
+        <h2>Payment</h2>
+        <p>Full payment is required before work begins. MtaaniWeb accepts M-Pesa and other payment methods communicated at the time of order. Payments are non-refundable once work has commenced.</p>
+
+        <h2>Site Continuity</h2>
+        <p>Your site remains live for 12 months from the date of launch. Annual renewal at the rates listed on our pricing page is required to keep the site active. If renewal is not made, the site will be taken offline. MtaaniWeb will attempt to notify clients ahead of any expiry.</p>
+
+        <h2>Contact for Legal Inquiries</h2>
+        <p>For any questions regarding these terms, contact us via WhatsApp at +254 715 392 010 or email info@mtaaniweb.co.ke.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- PRIVACY PAGE -->
+  <div class="page" id="page-privacy">
+    <section style="padding-top: 80px;">
+      <div class="legal-content">
+        <div class="section-label">Legal</div>
+        <h1 class="section-title">Privacy Policy</h1>
+
+        <h2>What We Collect</h2>
+        <p>We collect only the information required to build your website and deliver the service. This includes:</p>
+        <ul>
+          <li>Business name and description</li>
+          <li>Contact information (phone number and email address)</li>
+          <li>Logo or branding materials, if provided</li>
+        </ul>
+
+        <h2>How We Use Your Information</h2>
+        <p>Your information is used strictly for:</p>
+        <ul>
+          <li>Website creation and design</li>
+          <li>Project communication and delivery</li>
+          <li>Domain and hosting configuration</li>
+        </ul>
+
+        <h2>What We Do Not Do</h2>
+        <p>We do not sell, share, or distribute client data to third parties. We do not use client information for marketing purposes without explicit consent.</p>
+
+        <h2>Data Retention</h2>
+        <p>Client data is retained for the duration of the active service arrangement. Clients may request data deletion after project completion by contacting us directly.</p>
+
+        <h2>Contact</h2>
+        <p>For any privacy-related questions, reach us via WhatsApp at +254 715 392 010 or email info@mtaaniweb.co.ke.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo" onclick="showPage('home')">MtaaniWeb</span>
+    <ul class="footer-links">
+      <li><a onclick="showPage('about')">About</a></li>
+      <li><a onclick="showPage('contact')">Contact</a></li>
+      <li><a onclick="showPage('terms')">Terms</a></li>
+      <li><a onclick="showPage('privacy')">Privacy Policy</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 MtaaniWeb. All rights reserved. Nairobi, Kenya.</p>
+  </footer>
+
+  <script>
+    function showPage(name) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      const target = document.getElementById('page-' + name);
+      if (target) {
+        target.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function scrollTo(id) {
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+    }
+  </script>
+
+</body>
+</html>
