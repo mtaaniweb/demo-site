@@ -9,7 +9,7 @@ and hustlers in Kenya who need to get online fast and affordably.
 
 This is the official MtaaniWeb website. It is a single-file HTML site 
 hosted on GitHub Pages, covering all pages including Home, About, 
-Contact, Reviews, Terms and Conditions, and Privacy Policy.
+Contact, Reviews, Blog, Terms and Conditions, and Privacy Policy.
 
 ## Services
 
